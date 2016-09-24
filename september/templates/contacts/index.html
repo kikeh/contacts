@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %} Principal {% endblock %}
+
+{% block details %}
+
+<div class="">
+  <div class="page-title">
+    <div class="title_left">
+      <h3>New company</h3>
+    </div>
+  </div>
+  
+  <div class="clearfix"></div>
+
+  <a href="create/company">Create company</a>
+
+  <div class="companies">
+    {% for company in companies %}
+    <h3> * {{ company.name }}</h3>
+    {% endfor %}
+  </div>
+
+</div>
+
+{% endblock %}
