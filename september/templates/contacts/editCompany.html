@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 
-{% block title %} Create Company {% endblock %}
+{% block title %} Edit Company {% endblock %}
 
 {% block details %}
 
 <div class="">
   <div class="page-title">
     <div class="title_left">
-      <h3>New company</h3>
+      <h3>Edit company</h3>
     </div>
   </div>
   
@@ -24,7 +24,7 @@
         
         <div class="x_content">
 
-          <form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="" action="{% url 'create_company' %}" method="post">
+          <form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="" action="{% url 'edit_company' %}" method="post">
             {% csrf_token %}
             <div class="form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Name <span class="required">*</span>
@@ -35,7 +35,7 @@
                        name="name"
                        required="required"
                        class="form-control col-md-7 col-xs-12 {% if form.errors.name %}parsley-error{% endif %}"
-                       value="{% if form.data.name %}{{ form.data.name }}{% endif %}">
+                       value="{% if form.data.name %}{{ form.data.name }}{% else %}{{ company.name }}{% endif %}">
                 {% if form.errors.name %}
                 <ul class="parsley-errors-list filled" id="parsley-id-5"><li class="parsley-required">This value is required.</li></ul>
                 {% endif %}

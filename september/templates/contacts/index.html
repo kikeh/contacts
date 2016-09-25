@@ -13,11 +13,20 @@
   
   <div class="clearfix"></div>
 
-  <a href="create/company">Create company</a>
+  <a href="{% url 'create_company' %}">Create company</a><br>
+  <a href="{% url 'create_category' %}">Create category</a>
 
   <div class="companies">
+    <h1>Companies</h1>
     {% for company in companies %}
-    <h3> * {{ company.name }}</h3>
+    <h3><a href="{% url 'show_company' company.slug %}">{{ company.name }}</a></h3>
+    {% endfor %}
+  </div>
+  
+  <div class="categories">
+    <h1>Categories</h1>
+    {% for category in categories %}
+    <h3>{{ category.name }}</h3>
     {% endfor %}
   </div>
 

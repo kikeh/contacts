@@ -7,22 +7,22 @@ class Company(models.Model):
     name = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200)
     
-    contacts = models.ForeignKey(
-        'Contact',
-        on_delete = models.CASCADE,
-    )
+    # contacts = models.ForeignKey(
+    #     'Contact',
+    #     on_delete = models.CASCADE,
+    # )
 
-    communcications = models.ForeignKey(
-        'Communication',
-        on_delete = models.CASCADE,
-    )
+    # communications = models.ForeignKey(
+    #     'Communication',
+    #     on_delete = models.CASCADE,
+    # )
 
-    meetings = models.ForeignKey(
-        'Meeting',
-        on_delete = models.CASCADE,
-    )
+    # meetings = models.ForeignKey(
+    #     'Meeting',
+    #     on_delete = models.CASCADE,
+    # )
 
-    category = models.ManyToManyField('Category')
+    category = models.ForeignKey('Category', null = True)
 
 class Contact(models.Model):
     name = models.CharField(
@@ -86,6 +86,9 @@ class Meeting(models.Model):
 class Category(models.Model):
     name = models.CharField(max_length=50)
 
+    def __str__(self):
+        return self.name
+
 #########
 # FORMS #
 #########
@@ -93,4 +96,15 @@ class Category(models.Model):
 class CreateCompany(ModelForm):
     class Meta:
         model = Company
+        fields = ['name', 'category']
+
+    def clean_category(self):
+        category = self.cleaned_data['category'] if 'category' in self.cleaned_data else None
+        if not category:
+            raise ValidationError('No category was selected')
+        return category
+
+class CreateCategory(ModelForm):
+    class Meta:
+        model = Category
         fields = ['name']

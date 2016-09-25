@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ company.name }} {% endblock %}
+
+{% block details %}
+
+<div class="">
+  <div class="page-title">
+    <div class="title_left">
+      <h3>Company</h3>
+    </div>
+  </div>
+  
+  <div class="clearfix"></div>
+
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="x_panel">
+
+        <h1>{{ company.name }}</h1>
+        <h3>{{ company.category }}</h3>
+        <h5>{{ company.slug }}</h5>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
