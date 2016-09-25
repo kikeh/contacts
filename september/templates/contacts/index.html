@@ -24,10 +24,7 @@
   </div>
   
   <div class="categories">
-    <h1>Categories</h1>
-    {% for category in categories %}
-    <h3>{{ category.name }}</h3>
-    {% endfor %}
+    <a href="{% url 'show_categories' %}"><h1>Categories</h1></a>
   </div>
 
 </div>

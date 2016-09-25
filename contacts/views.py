@@ -7,8 +7,7 @@ from django.utils.text import slugify
 
 def index(request):
     companies = Company.objects.all()
-    categories = Category.objects.all()
-    return render(request, 'contacts/index.html', { 'companies' : companies, 'categories' : categories })
+    return render(request, 'contacts/index.html', { 'companies' : companies })
 
 def create_company(request):
     categories = Category.objects.all()
@@ -64,6 +63,10 @@ def create_category(request):
             return render(request, 'contacts/createCategory.html', { 'error' : 'Could not save category %s' % form })
     else:
         return render(request, 'contacts/createCategory.html')
+
+def show_categories(request):
+    categories = Category.objects.all()
+    return render(request, 'contacts/showCategories.html', { 'categories' : categories })
     
 ##
 # Helper methods
