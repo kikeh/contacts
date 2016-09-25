@@ -16,7 +16,7 @@ def create_company(request):
         data = request.POST
         form = CreateCompany(data)
         if form.is_valid():
-            company = form.save(commit = False)
+            company = form.save(commit=False)
             # Set slug and category
             # TODO: Check if slug is not already taken
             slug = slugify(data['name'])
@@ -31,12 +31,27 @@ def create_company(request):
         return render(request, 'contacts/createCompany.html', { 'categories' : categories })
 
 def show_company(request, slug):
-    company = Company.objects.get(slug = slug)
+    company = Company.objects.get(slug=slug)
     return render(request, 'contacts/showCompany.html', { 'company' : company })
 
 def edit_company(request, slug):
-    company = Company.objects.get(slug = slug)
-    return render(request, 'contacts/editCompany.html', { 'company' : company })
+    categories = Category.objects.all()
+    company = get_object_or_404(Company, slug=slug)
+    if request.method == 'POST':
+        data = request.POST
+        form = CreateCompany(data or None, instance=company)
+        if form.is_valid():
+            # Set slug and category
+            # TODO: Check if slug is not already taken
+            slug = slugify(data['name'])
+            company.slug = slug
+            category = get_category(data)
+            company.category = category
+            company.save()
+            return redirect("index")
+        else:
+            return render(request, 'contacts/createCompany.html', { 'form' : form, 'categories' : categories })
+    return render(request, 'contacts/editCompany.html', { 'company' : company, 'categories' : categories })
 
 def create_category(request):
     if request.method == 'POST':
@@ -57,7 +72,7 @@ def create_category(request):
 def get_category(data):
     try:
         category_id = data['category'] if 'category' in data else None
-        category = Category.objects.get(pk = category_id)
+        category = Category.objects.get(pk=category_id)
     except Category.DoesNotExist:
         return None
     return category

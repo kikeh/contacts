@@ -37,7 +37,7 @@
                        class="form-control col-md-7 col-xs-12 {% if form.errors.name %}parsley-error{% endif %}"
                        value="{% if form.data.name %}{{ form.data.name }}{% endif %}">
                 {% if form.errors.name %}
-                <ul class="parsley-errors-list filled" id="parsley-id-5"><li class="parsley-required">This value is required.</li></ul>
+                <ul class="parsley-errors-list filled"><li class="parsley-required">This value is required.</li></ul>
                 {% endif %}
               </div>
             </div>
@@ -54,7 +54,7 @@
                   {% endfor %}
                 </select>
                 {% if form.errors.category %}
-                <ul class="parsley-errors-list filled" id="parsley-id-5"><li class="parsley-required">This value is required.</li></ul>
+                <ul class="parsley-errors-list filled"><li class="parsley-required">This value is required.</li></ul>
                 {% endif %}
               </div>
             </div>

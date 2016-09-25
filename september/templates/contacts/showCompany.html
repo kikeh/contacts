@@ -21,6 +21,8 @@
         <h3>{{ company.category }}</h3>
         <h5>{{ company.slug }}</h5>
 
+        <a href="{% url 'edit_company' company.slug %}" type="button" class="btn btn-warning">Edit</a>
+
       </div>
     </div>
   </div>
