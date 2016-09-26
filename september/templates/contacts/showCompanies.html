@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %} Companies {% endblock %}
+
+{% block details %}
+
+<div class="">
+    <div class="page-title">
+        <div class="title_left">
+            <h3>Companies</h3>
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+
+                {% for company in companies %}
+                    <a href="{% url 'show_company' company.slug %}"><h4>{{ company.name }}</h4></a>
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

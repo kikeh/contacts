@@ -1,13 +1,14 @@
 from django.shortcuts import *
-from django.http import HttpResponse
 
 from contacts.models import *
 
 from django.utils.text import slugify
 
+
 def index(request):
     companies = Company.objects.all()
-    return render(request, 'contacts/index.html', { 'companies' : companies })
+    return render(request, 'contacts/index.html', {'companies': companies})
+
 
 def create_company(request):
     categories = Category.objects.all()
@@ -25,13 +26,19 @@ def create_company(request):
             company.save()
             return redirect("index")
         else:
-            return render(request, 'contacts/createCompany.html', { 'form' : form, 'categories' : categories })
+            return render(request, 'contacts/createCompany.html', {'form': form, 'categories': categories})
     else:
-        return render(request, 'contacts/createCompany.html', { 'categories' : categories })
+        return render(request, 'contacts/createCompany.html', {'categories': categories})
+
 
 def show_company(request, slug):
     company = Company.objects.get(slug=slug)
-    return render(request, 'contacts/showCompany.html', { 'company' : company })
+    return render(request, 'contacts/showCompany.html', {'company': company})
+
+
+def show_companies(request):
+    companies = Company.objects.all()
+    return render(request, 'contacts/showCompanies.html', {'companies': companies})
 
 def edit_company(request, slug):
     categories = Category.objects.all()
@@ -49,8 +56,9 @@ def edit_company(request, slug):
             company.save()
             return redirect("index")
         else:
-            return render(request, 'contacts/createCompany.html', { 'form' : form, 'categories' : categories })
-    return render(request, 'contacts/editCompany.html', { 'company' : company, 'categories' : categories })
+            return render(request, 'contacts/createCompany.html', {'form': form, 'categories': categories})
+    return render(request, 'contacts/editCompany.html', {'company': company, 'categories': categories})
+
 
 def create_category(request):
     if request.method == 'POST':
@@ -60,17 +68,20 @@ def create_category(request):
             category = form.save()
             return redirect("index")
         else:
-            return render(request, 'contacts/createCategory.html', { 'error' : 'Could not save category %s' % form })
+            return render(request, 'contacts/createCategory.html', {'error': 'Could not save category %s' % form})
     else:
         return render(request, 'contacts/createCategory.html')
 
+
 def show_categories(request):
     categories = Category.objects.all()
-    return render(request, 'contacts/showCategories.html', { 'categories' : categories })
-    
+    return render(request, 'contacts/showCategories.html', {'categories': categories})
+
+
 ##
 # Helper methods
 ##
+
 
 def get_category(data):
     try:
