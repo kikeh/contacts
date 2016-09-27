@@ -12,6 +12,7 @@ def index(request):
 
 def create_company(request):
     categories = Category.objects.all()
+    
     if request.method == 'POST':
         data = request.POST
         form = CreateCompany(data)
@@ -37,7 +38,7 @@ def show_company(request, slug):
 
 
 def show_companies(request):
-    companies = Company.objects.all()
+    companies = Company.objects.all().extra(order_by=['name'])
     return render(request, 'contacts/showCompanies.html', {'companies': companies})
 
 def edit_company(request, slug):
@@ -74,7 +75,7 @@ def create_category(request):
 
 
 def show_categories(request):
-    categories = Category.objects.all()
+    categories = Category.objects.all().extra(order_by=['name'])
     return render(request, 'contacts/showCategories.html', {'categories': categories})
 
 
