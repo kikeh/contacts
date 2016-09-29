@@ -38,7 +38,7 @@ def show_company(request, slug):
 
 
 def show_companies(request):
-    companies = Company.objects.all().extra(order_by=['name'])
+    companies = Company.objects.getCompanies()
     return render(request, 'contacts/showCompanies.html', {'companies': companies})
 
 def edit_company(request, slug):
@@ -75,7 +75,7 @@ def create_category(request):
 
 
 def show_categories(request):
-    categories = Category.objects.all().extra(order_by=['name'])
+    categories = Category.objects.getCategories()
     return render(request, 'contacts/showCategories.html', {'categories': categories})
 
 

@@ -2,27 +2,14 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.forms import ModelForm
+from contacts import managers
 
 class Company(models.Model):
     name = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200)
-    
-    # contacts = models.ForeignKey(
-    #     'Contact',
-    #     on_delete = models.CASCADE,
-    # )
-
-    # communications = models.ForeignKey(
-    #     'Communication',
-    #     on_delete = models.CASCADE,
-    # )
-
-    # meetings = models.ForeignKey(
-    #     'Meeting',
-    #     on_delete = models.CASCADE,
-    # )
-
     category = models.ForeignKey('Category', null = True)
+
+    objects = managers.CompanyManager()
 
 class Contact(models.Model):
     name = models.CharField(
@@ -85,6 +72,8 @@ class Meeting(models.Model):
     
 class Category(models.Model):
     name = models.CharField(max_length=50)
+
+    objects = managers.CategoryManager()
 
     def __str__(self):
         return self.name
